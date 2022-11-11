@@ -1,0 +1,9 @@
+body{
+    background: url(../img/background.jpeg) no-repeat center center fixed;
+    background-size: cover;
+}
+#bg {
+    background-image: url("../img/logo-icatom.svg");
+    background-position: center center;
+    background-repeat: no-repeat;
+}

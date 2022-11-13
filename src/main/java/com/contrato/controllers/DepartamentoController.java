@@ -2,6 +2,8 @@ package com.contrato.controllers;
 
 import com.contrato.models.Departamento;
 import com.contrato.repository.DepartamentoRepository;
+import com.contrato.services.DepartamentoService;
+import com.contrato.services.impl.DepartamentoImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,13 +17,15 @@ import java.util.List;
 public class DepartamentoController {
 
     @Autowired
-    DepartamentoRepository departamentoRepository;
+    private DepartamentoService departamentoService;
 
     @GetMapping("/departamentos")
     public String ListarDepartamentos(Model model){
-        List<Departamento> departamentoList = departamentoRepository.findAll();
-        model.addAttribute("departamentoList", departamentoList);
-
+        try {
+            model.addAttribute("departamentoList", departamentoService.listAll());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         return "departamentos";
     }
 
@@ -34,14 +38,14 @@ public class DepartamentoController {
 
     @PostMapping("/departamentos/guardar")
     public String guardarDepartamento(Departamento departamento){
-        departamentoRepository.save(departamento);
+        departamentoService.save(departamento);
 
         return "redirect:/departamentos";
     }
 
     @GetMapping("/departamentos/editar/{id}")
     public String MostrarFormularioDeEditarDepartamento(@PathVariable("id") Long id, Model model){
-        Departamento departamento = departamentoRepository.getById(id);
+        Departamento departamento = departamentoService.listById(id);
         model.addAttribute("departamento",departamento);
 
         return "departamento_form";
@@ -49,7 +53,11 @@ public class DepartamentoController {
 
     @GetMapping("/departamentos/eliminar/{id}")
     public String eliminarDepartamento(@PathVariable("id") Long id, Model model){
-        departamentoRepository.deleteById(id);
+        try {
+            departamentoService.deleteById(id);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
         return "redirect:/departamentos";
     }

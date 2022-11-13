@@ -4,6 +4,8 @@ import com.contrato.models.Departamento;
 import com.contrato.models.Empleado;
 import com.contrato.repository.DepartamentoRepository;
 import com.contrato.repository.EmpleadoRepository;
+import com.contrato.services.DepartamentoService;
+import com.contrato.services.EmpleadoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,14 +19,14 @@ import java.util.List;
 public class EmpleadoController {
 
     @Autowired
-    EmpleadoRepository empleadoRepository;
+    private EmpleadoService empleadoService;
 
     @Autowired
-    DepartamentoRepository departamentoRepository;
+    private DepartamentoService departamentoService;
 
     @GetMapping("/empleados/nuevo")//Metodo para mostrar el formulario
     public String MostrarFormularioEmpleado(Model model) {
-        List<Departamento> departamentoList = departamentoRepository.findAll();
+        List<Departamento> departamentoList = departamentoService.listAll();
         model.addAttribute("empleado", new Empleado());
         model.addAttribute("departamentoList", departamentoList);
 
@@ -33,25 +35,28 @@ public class EmpleadoController {
 
     @PostMapping("/empleados/guardar")//Metodo para guardar un empleado
     public String guardarEmpleado(Empleado empleado) {
-        empleadoRepository.save(empleado);
+        empleadoService.save(empleado);
 
         return "redirect:/empleados";
     }
 
     @GetMapping("/empleados")//Metodo para listar a los empleados
     public String ListarEmpleados(Model model) {
-        List<Empleado> empleadoList = empleadoRepository.findAll();
-        model.addAttribute("empleadoList", empleadoList);
+       try {
+           model.addAttribute("empleadoList", empleadoService.listAll());
+       }catch (Exception e){
+           e.printStackTrace();
+       }
 
         return "empleados";
     }
 
     @GetMapping("/empleados/editar/{id}")//Metodo para modificar los datos del empleado
     public String MostrarFormularioDeEditarEmpleado(@PathVariable("id") Long id, Model model) {
-        Empleado empleado = empleadoRepository.getById(id);
+        Empleado empleado = empleadoService.listById(id);
         model.addAttribute("empleado",empleado);
 
-        List<Departamento> departamentoList = departamentoRepository.findAll();
+        List<Departamento> departamentoList = departamentoService.listAll();
         model.addAttribute("departamentoList", departamentoList);
 
         return "empleado_form";
@@ -59,7 +64,11 @@ public class EmpleadoController {
 
     @GetMapping("/empleados/eliminar/{id}")//Metodo para eliminar un empleado
     public String eliminarEmpleado(@PathVariable("id") Long id, Model model) {
-        empleadoRepository.deleteById(id);
+        try {
+            empleadoService.deleteById(id);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
         return "redirect:/empleados";
     }

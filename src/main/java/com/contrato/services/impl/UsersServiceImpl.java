@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UsersServiceImpl implements IUsersService {
 
@@ -34,5 +36,20 @@ public class UsersServiceImpl implements IUsersService {
 
         objUser.getRoles().add(role);
         objUser = iUsersRepository.save(objUser);
+    }
+
+    @Override
+    public List<Usuario> listAll() {
+        return iUsersRepository.findAll();
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        iUsersRepository.deleteById(id);
+    }
+
+    @Override
+    public Usuario listById(Long id) {
+        return iUsersRepository.findById(id).get();
     }
 }

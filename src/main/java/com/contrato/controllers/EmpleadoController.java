@@ -30,7 +30,7 @@ public class EmpleadoController {
         model.addAttribute("empleado", new Empleado());
         model.addAttribute("departamentoList", departamentoList);
 
-        return "empleado_form";
+        return "Secciones/empleado_form";
     }
 
     @PostMapping("/empleados/guardar")//Metodo para guardar un empleado
@@ -48,7 +48,7 @@ public class EmpleadoController {
            e.printStackTrace();
        }
 
-        return "empleados";
+        return "Secciones/empleados";
     }
 
     @GetMapping("/empleados/editar/{id}")//Metodo para modificar los datos del empleado
@@ -59,7 +59,7 @@ public class EmpleadoController {
         List<Departamento> departamentoList = departamentoService.listAll();
         model.addAttribute("departamentoList", departamentoList);
 
-        return "empleado_form";
+        return "Secciones/empleado_form";
     }
 
     @GetMapping("/empleados/eliminar/{id}")//Metodo para eliminar un empleado

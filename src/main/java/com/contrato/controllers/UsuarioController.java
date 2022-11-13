@@ -36,4 +36,14 @@ public class UsuarioController {
             return "usuario_form";
         }
     }
+
+    @GetMapping("/usuarios")
+    public String ListarUsuarios(Model model){
+        try {
+            model.addAttribute("usuariosList", iUsersService.listAll());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return "usuarios";
+    }
 }

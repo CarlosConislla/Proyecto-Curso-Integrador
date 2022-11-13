@@ -49,14 +49,18 @@
             <thead class="thead-light">
             <tr>
                 <th scope="col">ID</th>
-                <th scope="col">NOMBRE</th>
+                <th scope="col">USERNAME</th>
+                <th scope="col">PASSWORD</th>
+                <th scope="col">NOMBRES</th>
                 <th scope="col">ACCIONES</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <th scope="row"></th>
-                <td></td>
+            <tr th:each="usuario: ${usuariosList}">
+                <th scope="row" th:text="${usuario.id}"></th>
+                <td th:text="${usuario.username}"></td>
+                <td th:text="${usuario.password}"></td>
+                <td th:text="${usuario.fullName}"></td>
                 <td>
                     <a href="#"><i class="fas fa-edit"></i></a> |
                     <a href="#"><i

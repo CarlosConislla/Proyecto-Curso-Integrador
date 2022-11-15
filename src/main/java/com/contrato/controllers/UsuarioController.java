@@ -22,7 +22,7 @@ public class UsuarioController {
     @GetMapping("/usuarios/nuevo")
     public String MostrarFormDeUsuario (Model model){
         model.addAttribute("usuario", new Usuario());
-        return "usuario_form";
+        return "Admin/usuario_form";
     }
 
     @PostMapping("/usuarios/guardar")
@@ -33,7 +33,7 @@ public class UsuarioController {
             return "redirect:/login";
         } catch (Exception e){
             System.out.println(e.getMessage());
-            return "usuario_form";
+            return "Admin/usuario_form";
         }
     }
 
@@ -44,6 +44,6 @@ public class UsuarioController {
         }catch (Exception e){
             e.printStackTrace();
         }
-        return "usuarios";
+        return "Admin/usuarios";
     }
 }

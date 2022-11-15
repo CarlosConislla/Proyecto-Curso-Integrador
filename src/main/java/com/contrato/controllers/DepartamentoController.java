@@ -26,14 +26,14 @@ public class DepartamentoController {
         }catch (Exception e){
             e.printStackTrace();
         }
-        return "departamentos";
+        return "Admin/departamentos";
     }
 
     @GetMapping("/departamentos/nuevo")
     public String MostrarFormulario(Model model){
         model.addAttribute("departamento", new Departamento());
 
-        return "departamento_form";
+        return "Admin/departamento_form";
     }
 
     @PostMapping("/departamentos/guardar")
@@ -48,7 +48,7 @@ public class DepartamentoController {
         Departamento departamento = departamentoService.listById(id);
         model.addAttribute("departamento",departamento);
 
-        return "departamento_form";
+        return "Admin/departamento_form";
     }
 
     @GetMapping("/departamentos/eliminar/{id}")

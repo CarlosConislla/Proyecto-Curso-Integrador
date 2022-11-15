@@ -41,7 +41,7 @@ public class PostulanteController {
             e.printStackTrace();
         }
 
-        return "postulantes";
+        return "User/postulantes";
     }
 
     @GetMapping(value = "postulantes/uploads/{filename}")
@@ -62,7 +62,7 @@ public class PostulanteController {
         List<Departamento> departamentoList = departamentoRepository.findAll();
         model.addAttribute("postulante", new Postulante());
         model.addAttribute("departamentoList", departamentoList);
-        return "postulante_form";
+        return "User/postulante_form";
     }
 
     @PostMapping("/postulantes/guardar")
@@ -71,7 +71,7 @@ public class PostulanteController {
                                     RedirectAttributes flash, SessionStatus status) throws Exception {
         if (result.hasErrors()){
             System.out.println(result.getFieldError());
-            return "postulante_form";
+            return "User/postulante_form";
         } else {
             if (!cv.isEmpty()){
                 if (postulante.getId() > 0 && postulante.getCv() != null && postulante.getCv().length() > 0){
@@ -94,7 +94,7 @@ public class PostulanteController {
         List<Departamento> departamentoList = departamentoRepository.findAll();
         model.addAttribute("departamentoList", departamentoList);
 
-        return "postulante_form";
+        return "User/postulante_form";
     }
 
     @GetMapping("/postulantes/detail/{id}")
@@ -105,7 +105,7 @@ public class PostulanteController {
         List<Departamento> departamentoList = departamentoRepository.findAll();
         model.addAttribute("departamentoList", departamentoList);
 
-        return "cv_detalles";
+        return "User/cv_detalles";
     }
 
     @GetMapping("/postulantes/delete/{id}")

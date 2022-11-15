@@ -3,6 +3,7 @@ package com.contrato.controllers;
 import com.contrato.models.Departamento;
 import com.contrato.models.Postulante;
 import com.contrato.repository.DepartamentoRepository;
+import com.contrato.services.DepartamentoService;
 import com.contrato.services.IUploadFileService;
 import com.contrato.services.PostulanteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ public class PostulanteController {
     private IUploadFileService iUploadFileService;
 
     @Autowired
-    DepartamentoRepository departamentoRepository;
+    private DepartamentoService departamentoService;
 
     @GetMapping("/postulantes")
     public String ListarPostulantes(Model model) {
@@ -59,7 +60,7 @@ public class PostulanteController {
 
     @GetMapping("/postulantes/nuevo")
     public String MostrarFormDePostulante(Model model) {
-        List<Departamento> departamentoList = departamentoRepository.findAll();
+        List<Departamento> departamentoList = departamentoService.listAll();
         model.addAttribute("postulante", new Postulante());
         model.addAttribute("departamentoList", departamentoList);
         return "User/postulante_form";
@@ -91,7 +92,7 @@ public class PostulanteController {
         Postulante postulante = postulanteService.listById(id);
         model.addAttribute("postulante",postulante);
 
-        List<Departamento> departamentoList = departamentoRepository.findAll();
+        List<Departamento> departamentoList = departamentoService.listAll();
         model.addAttribute("departamentoList", departamentoList);
 
         return "User/postulante_form";
@@ -102,7 +103,7 @@ public class PostulanteController {
         Postulante postulante = postulanteService.listById(id);
         model.addAttribute("postulante",postulante);
 
-        List<Departamento> departamentoList = departamentoRepository.findAll();
+        List<Departamento> departamentoList = departamentoService.listAll();
         model.addAttribute("departamentoList", departamentoList);
 
         return "User/cv_detalles";

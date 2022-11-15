@@ -15,11 +15,11 @@
   <div class="col-md6 col-lg-4">
     <h3 class="h3 text-center">Registro de Roles</h3>
     <br>
-    <form th:action="@{/roles/guardar}" method="post" th:object="${role}">
-      <input type="hidden" th:field="*{id}" th:value="${departamento.id}"/>
+    <form action="" method="post">
+      <input type="hidden">
       <div class="mb-2">
         <label for="authority">Rol : </label>
-        <input id="authority" type="text" placeholder="Digite el Rol" th:field="*{authority}" class="form-control">
+        <input id="authority" type="text" placeholder="Digite el Rol"  class="form-control">
       </div>
       <div class="text-end text-center">
         <button type="submit" class="btn btn-success"><i class="fas fa-save"></i>&nbsp;Guardar</button>

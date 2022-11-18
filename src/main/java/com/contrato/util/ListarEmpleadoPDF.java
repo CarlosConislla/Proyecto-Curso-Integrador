@@ -63,7 +63,7 @@ public class ListarEmpleadoPDF {
             table.addCell(String.valueOf(empleado.getEdad()));
             table.addCell(empleado.getIcontrato().toString());
             table.addCell(empleado.getFcontrato().toString());
-            table.addCell(empleado.getDepartamento().toString());
+            table.addCell(empleado.getDepartamento().getNombre());
         }
     }
 

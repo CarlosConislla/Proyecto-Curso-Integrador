@@ -6,6 +6,7 @@ import com.contrato.repository.DepartamentoRepository;
 import com.contrato.repository.EmpleadoRepository;
 import com.contrato.services.DepartamentoService;
 import com.contrato.services.EmpleadoService;
+import com.contrato.util.ListarEmpleadoEXCEL;
 import com.contrato.util.ListarEmpleadoPDF;
 import com.lowagie.text.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -97,5 +98,23 @@ public class EmpleadoController {
 
         ListarEmpleadoPDF listarEmpleadoPDF = new ListarEmpleadoPDF(empleadoList);
         listarEmpleadoPDF.exportar(response);
+    }
+
+    @GetMapping("/empleados/exportarEXCEL")
+    public void exportarListaDeEmpleadosEnExcel(HttpServletResponse response) throws DocumentException, IOException{
+        response.setContentType("application/octet-stream");
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+        String fechaActual = dateFormat.format(new Date());
+
+        String cabecera = "Content-Disposition";
+        String valor = "attachment; filename=Empleados_" + fechaActual + ".xlsx";
+
+        response.setHeader(cabecera, valor);
+
+        List<Empleado> empleadoList = empleadoService.listAll();
+
+        ListarEmpleadoEXCEL listarEmpleadoEXCEL = new ListarEmpleadoEXCEL(empleadoList);
+        listarEmpleadoEXCEL.exportar(response);
     }
 }

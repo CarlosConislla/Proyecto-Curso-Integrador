@@ -46,6 +46,11 @@
 </nav>
 <h1 class="h1 text-center">Lista de Empleados</h1>
 <div class="container">
+    <a class="btn btn-primary" th:href="@{/empleados/exportarPDF}">Exportar PDF</a>
+    <a class="btn btn-primary" th:href="@{/empleados/exportarEXCEL}">Exportar Excel</a>
+</div>
+<br>
+<div class="container">
     <div class="table-responsive">
         <table id="userList" class="table table-bordered table-hover table-striped">
             <thead class="thead-light">

@@ -54,9 +54,9 @@
       </tr>
       </thead>
       <tbody>
-      <tr>
-        <th scope="row"></th>
-        <td></td>
+      <tr th:each="rol: ${rolesList}">
+        <th scope="row" th:text="${rol.id}" ></th>
+        <td th:text="${rol.authority}"></td>
         <td>
           <a href=""><i class="fas fa-edit"></i></a> |
           <a href=""><i

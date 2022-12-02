@@ -9,6 +9,7 @@ import com.lowagie.text.pdf.PdfWriter;
 
 import javax.servlet.http.HttpServletResponse;
 import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -70,6 +71,33 @@ public class ListarEmpleadoPDF {
     public void exportar(HttpServletResponse response) throws DocumentException, IOException {
         Document document = new Document(PageSize.A4);
         PdfWriter.getInstance(document, response.getOutputStream());
+
+        document.open();
+
+        Font font = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
+        font.setColor(Color.blue);
+        font.setSize(18);
+
+        Paragraph titulo = new Paragraph("Lista De Empleados");
+        titulo.setAlignment(Paragraph.ALIGN_CENTER);
+        document.add(titulo);
+
+        PdfPTable table = new PdfPTable(8);
+        table.setWidthPercentage(100);
+        table.setSpacingBefore(15);
+        table.setWidths(new float[] {1f, 2.3f, 2.3f, 2.3f, 2.3f, 2.9f, 2.9f, 5f});
+        table.setWidthPercentage(110);
+
+        EscribirCabeceraDeLaTabla(table);
+        EscribirDatosDeLaTabla(table);
+
+        document.add(table);
+        document.close();
+    }
+
+    public void exportarPDFCorreo() throws DocumentException, IOException {
+
+        Document document = new Document(PageSize.A4);
 
         document.open();
 

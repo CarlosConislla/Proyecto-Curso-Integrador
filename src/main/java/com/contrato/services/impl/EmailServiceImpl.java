@@ -26,9 +26,6 @@ public class EmailServiceImpl {
     @Autowired
     private JavaMailSender mailSender;
 
-    @Autowired
-    private EmpleadoService empleadoService;
-
     @Value("${spring.mail.username}")
     private String email;
 
@@ -58,6 +55,25 @@ public class EmailServiceImpl {
             helper.setSubject("Listado de Empleados");
             helper.setText("Se le adjunta la lista de Empleados de la Empresa");
             helper.addAttachment("Listado de Empleados", new File("C:\\Users\\user\\Documents\\Spring P\\Contratos\\reportes\\Empleados.pdf"));
+            mailSender.send(message);
+
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void SendReporteDpta(String emailTo) throws MessagingException {
+
+        MimeMessage message = mailSender.createMimeMessage();
+
+        try {
+            MimeMessageHelper helper = new MimeMessageHelper(message, true);
+
+            helper.setFrom(email);
+            helper.setTo(emailTo);
+            helper.setSubject("Listado de Departamentos");
+            helper.setText("Se le adjunta la lista de Departamentos de la Empresa");
+            helper.addAttachment("Listado de Empleados", new File("C:\\Users\\user\\Documents\\Spring P\\Contratos\\reportes\\Departamentos.pdf"));
             mailSender.send(message);
 
         } catch (MessagingException e) {

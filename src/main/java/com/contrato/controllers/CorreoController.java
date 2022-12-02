@@ -15,6 +15,7 @@ public class CorreoController {
     @Autowired
     private EmailServiceImpl emailService;
 
+    //Correos Empleados
     @GetMapping("/correo")
     public String correo (){
         this.emailService.SendMessage(" cqcarlos10@gmail.com");
@@ -25,5 +26,18 @@ public class CorreoController {
     public String correoLista () throws IOException, MessagingException {
         this.emailService.SendReporte(" cqcarlos10@gmail.com");
         return "redirect:/empleados";
+    }
+
+    //Correos Departamentos
+    @GetMapping("/correo/dpta")
+    public String correoDpta (){
+        this.emailService.SendMessage(" cqcarlos10@gmail.com");
+        return "redirect:/departamentos";
+    }
+
+    @GetMapping("/correo/dpta/lista")
+    public String correoDptaLista () throws MessagingException {
+        this.emailService.SendReporteDpta(" cqcarlos10@gmail.com");
+        return "redirect:/departamentos";
     }
 }

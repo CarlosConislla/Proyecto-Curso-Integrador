@@ -38,13 +38,13 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/empleados/**").access("hasRole('ROLE_ADMIN')")
                     // Para que solo un usuario logueado con esos roles acceda al modulo de departamentos
                     .antMatchers("/departamentos").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
-                    .antMatchers("/departamentos/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
+                    .antMatchers("/departamentos/**").access("hasRole('ROLE_ADMIN')")
                     // Para que solo un usuario logueado con esos roles acceda al modulo de postulantes
                     .antMatchers("/postulantes").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
                     .antMatchers("/postulantes/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
                     // Para que solo un usuario con ROLE_ADMIN pueda acceder al modulo de usuarios
-                    .antMatchers("/usuarios").permitAll()
-                    .antMatchers("/usuarios/**").permitAll()
+                    .antMatchers("/usuarios").access("hasRole('ROLE_ADMIN')")
+                    .antMatchers("/usuarios/**").access("hasRole('ROLE_ADMIN')")
                     // Lógica del login (configurado en LoginSucessHandler)
                     .and().formLogin().successHandler(sucessHandler).loginPage("/login").loginProcessingUrl("/login")
                     // Si el login es exitoso, retorna a /

@@ -29,9 +29,7 @@
                     <ul class="dropdown-menu text-center" aria-labelledby="navbarDropdown"
                         sec:authorize="isAuthenticated()">
                         <li><i class="fas fa-user"></i></li>
-                        <li>User:</li>
-                        <li>Email:</li>
-                        <li>Rol:</li>
+                        <li>User: [[${#httpServletRequest.remoteUser}]]</li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>

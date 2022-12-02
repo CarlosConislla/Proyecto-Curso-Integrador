@@ -25,33 +25,21 @@
 		});
 
 
+
     </script>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">ICATOM-CONTRATOS</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse text-center" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/">Inicio</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
 <div class="container text-center">
     <div class="row">
         <div class="col-sm-4"></div>
         <div class="col-sm-4">
             <div class="card bg-danger text-white">
-                <div class="card-header">Error: Acceso Negado</div>
+                <div class="card-header">Error 403: Acceso Denegado</div>
                 <div class="card-body">
-                    <h5 class="card-title mb-3">No tienes permiso ROLE_ADMIN</h5>
+                    <img src="static/img/denegado.webp" th:src="@{/img/denegado.webp}"
+                         alt="" width="70" height="70">
+                    <h5 class="card-title mb-3">No tienes permiso debes ser un ADMINISNTRADOR</h5>
+                    <a class="btn btn-primary" aria-current="page" href="/">Volver al Inicio</a>
                 </div>
             </div>
         </div>

@@ -1,5 +1,6 @@
 package com.contrato.controllers;
 
+import com.contrato.models.Role;
 import com.contrato.models.Usuario;
 import com.contrato.services.IUsersService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.text.ParseException;
@@ -30,7 +32,7 @@ public class UsuarioController {
             throws ParseException {
         try {
             iUsersService.insert(usuario);
-            return "redirect:/login";
+            return "redirect:/usuarios";
         } catch (Exception e){
             System.out.println(e.getMessage());
             return "Admin/usuario_form";
@@ -45,5 +47,13 @@ public class UsuarioController {
             e.printStackTrace();
         }
         return "Admin/usuarios";
+    }
+
+    @GetMapping("/usuarios/editar/{id}")//Metodo para modificar los datos del empleado
+    public String MostrarFormularioDeEditarEmpleado(@PathVariable("id") Long id, Model model) {
+        Usuario usuario = iUsersService.listById(id);
+        model.addAttribute("usuario",usuario);
+
+        return "Admin/role_form";
     }
 }

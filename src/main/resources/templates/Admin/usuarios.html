@@ -56,7 +56,7 @@
                 <th scope="col">USERNAME</th>
                 <th scope="col">PASSWORD</th>
                 <th scope="col">NOMBRES</th>
-                <th scope="col">ACCIONES</th>
+                <!--<th scope="col">ACCIONES</th>-->
             </tr>
             </thead>
             <tbody>
@@ -65,11 +65,11 @@
                 <td th:text="${usuario.username}"></td>
                 <td th:text="${usuario.password}"></td>
                 <td th:text="${usuario.fullName}"></td>
-                <td>
-                    <a href="#"><i class="fas fa-edit"></i></a> |
+                <!--<td>
+                    <a th:href="@{'/usuarios/editar'+'/'+${usuario.id}}"><i class="fas fa-edit"></i></a> |
                     <a href="#"><i
                             class="fas fa-user-times"></i></a>
-                </td>
+                </td>-->
             </tr>
             </tbody>
         </table>

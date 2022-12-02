@@ -50,18 +50,16 @@
       <tr>
         <th scope="col">ID</th>
         <th scope="col">NOMBRE</th>
-        <th scope="col">ACCIONES</th>
+        <!--<th scope="col">ACCIONES</th>-->
       </tr>
       </thead>
       <tbody>
       <tr th:each="rol: ${rolesList}">
         <th scope="row" th:text="${rol.id}" ></th>
         <td th:text="${rol.authority}"></td>
-        <td>
-          <a href=""><i class="fas fa-edit"></i></a> |
-          <a href=""><i
-                  class="fas fa-user-times"></i></a>
-        </td>
+        <!--<td class="text-center">
+          <a th:href="@{'/roles/editar'+'/'+${rol.id}}"><i class="fas fa-edit"></i></a>
+        </td>-->
       </tr>
       </tbody>
     </table>

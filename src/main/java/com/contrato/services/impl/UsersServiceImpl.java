@@ -31,7 +31,7 @@ public class UsersServiceImpl implements IUsersService {
 
         Role role = new Role();
         // Se asigna el rol con el que queremos que el usuario se cree
-        role.setAuthority("ROLE_USER");
+        role.setAuthority("ROLE_ADMIN");
         role = iRoleRepository.save(role);
 
         objUser.getRoles().add(role);

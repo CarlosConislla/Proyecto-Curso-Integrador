@@ -1,5 +1,6 @@
 package com.contrato.util;
 
+import com.contrato.models.Departamento;
 import com.contrato.models.Empleado;
 import com.lowagie.text.*;
 import com.lowagie.text.Font;
@@ -9,16 +10,15 @@ import com.lowagie.text.pdf.PdfWriter;
 
 import javax.servlet.http.HttpServletResponse;
 import java.awt.*;
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-public class ListarEmpleadoPDF {
+public class ListarDptaPDF {
 
-    private List<Empleado> empleadoList;
+    private List<Departamento> departamentoList;
 
-    public ListarEmpleadoPDF(List<Empleado> empleadoList) {
-        this.empleadoList = empleadoList;
+    public ListarDptaPDF(List<Departamento> departamentoList) {
+        this.departamentoList = departamentoList;
     }
 
     private void EscribirCabeceraDeLaTabla(PdfPTable table){
@@ -35,41 +35,18 @@ public class ListarEmpleadoPDF {
 
         cell.setPhrase(new Phrase("NOMBRE", font));
         table.addCell(cell);
-
-        cell.setPhrase(new Phrase("APELLIDOS", font));
-        table.addCell(cell);
-
-        cell.setPhrase(new Phrase("DNI", font));
-        table.addCell(cell);
-
-        cell.setPhrase(new Phrase("EDAD", font));
-        table.addCell(cell);
-
-        cell.setPhrase(new Phrase("I.CONTRATO", font));
-        table.addCell(cell);
-
-        cell.setPhrase(new Phrase("F.CONTRATO", font));
-        table.addCell(cell);
-
-        cell.setPhrase(new Phrase("DEPARTAMENTO", font));
-        table.addCell(cell);
     }
 
     private void EscribirDatosDeLaTabla(PdfPTable table){
-        for (Empleado empleado : empleadoList){
-            table.addCell(String.valueOf(empleado.getId()));
-            table.addCell(empleado.getNombre());
-            table.addCell(empleado.getApellido());
-            table.addCell(empleado.getDni());
-            table.addCell(String.valueOf(empleado.getEdad()));
-            table.addCell(empleado.getIcontrato().toString());
-            table.addCell(empleado.getFcontrato().toString());
-            table.addCell(empleado.getDepartamento().getNombre());
+        for (Departamento departamento : departamentoList){
+            table.addCell(String.valueOf(departamento.getId()));
+            table.addCell(departamento.getNombre());
         }
     }
 
     public void exportar(HttpServletResponse response) throws DocumentException, IOException {
         Document document = new Document(PageSize.A4);
+
         PdfWriter.getInstance(document, response.getOutputStream());
 
         document.open();
@@ -78,14 +55,14 @@ public class ListarEmpleadoPDF {
         font.setColor(Color.blue);
         font.setSize(18);
 
-        Paragraph titulo = new Paragraph("Lista De Empleados");
+        Paragraph titulo = new Paragraph("Lista De Departamentos");
         titulo.setAlignment(Paragraph.ALIGN_CENTER);
         document.add(titulo);
 
-        PdfPTable table = new PdfPTable(8);
+        PdfPTable table = new PdfPTable(2);
         table.setWidthPercentage(100);
         table.setSpacingBefore(15);
-        table.setWidths(new float[] {1f, 2.3f, 2.3f, 2.3f, 2.3f, 2.9f, 2.9f, 5f});
+        table.setWidths(new float[] {1f, 2.3f});
         table.setWidthPercentage(110);
 
         EscribirCabeceraDeLaTabla(table);
